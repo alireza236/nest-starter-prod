@@ -31,8 +31,9 @@ export class AuthController {
 		console.log(req.headers["x-requested-with"]);
 
 		response.json({
-			message: result.message,
-			status: result.status,
+			metas: result.metas,
+			message: result.data.message,
+			status: result.data.status,
 		});
 	}
 }

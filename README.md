@@ -29,4 +29,6 @@ $ npm run test
 $ npm run test:cov
 ```
 
- 
+ <!-- // 
+ "start:prod": "cross-env FRONTEND_URL='http://localhost:3000'  APP_NAME='APP PROD' DATABASE_URL='mysql://root:password@localhost:3306/contact_management' PORT='8080' NODE_ENV='production' dotenv -e .env.production  node dist/main", 
+ -->

@@ -1,6 +1,6 @@
 export class WebResponse<T> {
 	metas?: Record<string, string>;
-	data?: T;
+	data: T;
 	errors?: string;
 	message?: string;
 	total_count?: number;

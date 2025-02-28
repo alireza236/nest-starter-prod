@@ -56,6 +56,11 @@ export class PrismaService
 		}
 	}
 
+	async OnErrorEventHandler() {
+		await this.OnErrorEventHandler();
+		this.logger.error("error", "Connection to the database failed");
+	}
+
 	async onModuleDestroy() {
 		await this.$disconnect();
 		this.logger.log("info", "App is restarting");

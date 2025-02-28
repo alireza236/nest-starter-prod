@@ -3,6 +3,7 @@ import { Injectable, Logger } from "@nestjs/common";
 import { RegisterSchema } from "@/auth/auth.validation";
 import { ValidationService } from "@/common/validation.service";
 import { RegisterUserRequest } from "@/models/auth.model";
+import { WebResponse } from "@/models/web.model";
 import { UserService } from "@/user/user.service";
 
 @Injectable()
@@ -13,7 +14,9 @@ export class AuthService {
 		private readonly validationService: ValidationService,
 	) {}
 
-	async register(request: RegisterUserRequest) {
+	async register(
+		request: RegisterUserRequest,
+	): Promise<WebResponse<{ message: string; status: string }>> {
 		const validate = await this.validationService.validate(
 			RegisterSchema,
 			request,
@@ -21,8 +24,13 @@ export class AuthService {
 
 		this.logger.log(`validate ${JSON.stringify(validate)}`);
 		return {
-			message: "confirmation email has been send",
-			status: "success",
+			data: {
+				message: "confirmation email has been send",
+				status: "success",
+			},
+			metas: {
+				"X-Request-ID": "123",
+			},
 		};
 	}
 }
