@@ -1,4 +1,4 @@
-import { z, ZodSchema } from "zod";
+import { z, ZodSchema } from "zod/v3";
 
 export const RegisterSchema = z
 	.object({

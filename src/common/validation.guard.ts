@@ -1,10 +1,12 @@
 import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 import { Request } from "express";
-import { ZodSchema, ZodType } from "zod";
+import { ZodType, ZodSchema } from "zod/v3";
 
 @Injectable()
-export class ValidationGuard implements CanActivate {
-	constructor(private readonly schema: ZodSchema<ZodType>) {}
+export class ValidationGuard<T extends ZodType<ZodSchema>>
+	implements CanActivate
+{
+	constructor(private readonly schema: T) {}
 
 	async canActivate(context: ExecutionContext): Promise<boolean> {
 		const request: Request = context.switchToHttp().getRequest();
