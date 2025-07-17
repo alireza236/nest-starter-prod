@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { ZodType } from "zod/v3";
+import { ZodType } from "zod";
 
 @Injectable()
 export class ValidationService {
@@ -8,6 +8,7 @@ export class ValidationService {
 		if (!validate.success) {
 			throw new Error(validate.error.message);
 		}
+
 		return validate.data;
 	}
 }

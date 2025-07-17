@@ -7,7 +7,7 @@ import {
 } from "@nestjs/common";
 import { Prisma } from "@prisma/client";
 import { Response, Request } from "express";
-import { ZodError } from "zod/v3";
+import * as z from "zod";
 
 export class ErrorFilter implements ExceptionFilter {
 	catch(exception: unknown, host: ArgumentsHost) {
@@ -37,9 +37,9 @@ export class ErrorFilter implements ExceptionFilter {
 				errors: exception.name,
 				message: exception.message,
 			});
-		} else if (exception instanceof ZodError) {
+		} else if (exception instanceof z.ZodError) {
 			response.status(400).json({
-				errors: exception.errors.map(({ message, path, code }) => ({
+				errors: exception.issues.map(({ message, path, code }) => ({
 					message,
 					path,
 					code,
