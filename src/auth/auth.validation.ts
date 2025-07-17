@@ -1,4 +1,4 @@
-import { z, ZodSchema } from "zod/v3";
+import * as z from "zod";
 
 export const RegisterSchema = z
 	.object({
@@ -15,11 +15,7 @@ export const RegisterSchema = z
 			.trim()
 			.min(3, { message: "Username must be at least 3 characters long." })
 			.max(30, { message: "Username cannot exceed 30 characters." }),
-		email: z
-			.string()
-			.trim()
-			.min(1, { message: "Email is required." })
-			.email({ message: "Please provide a valid email address." }),
+		email: z.email().trim().min(1, { message: "Email is required." }),
 		password: z
 			.string()
 			.trim()
@@ -51,5 +47,5 @@ export const RegisterSchema = z
 	});
 
 export class AuthValidation {
-	static readonly REGISTER: ZodSchema = RegisterSchema;
+	static readonly REGISTER: z.ZodType = RegisterSchema;
 }
